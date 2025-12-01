@@ -1,38 +1,593 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1e2e 0%, #2d1b4e 100%);
+  color: #fff;
+  padding-bottom: 2rem;
+  overflow: hidden;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.controls {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  max-width: 700px;
   display: flex;
-  flex-direction: column;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+}
+
+.control-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.controls label {
+  font-size: 1.1rem;
+}
+
+.controls .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.controls input[type="checkbox"] {
+  width: auto;
+  cursor: pointer;
+}
+
+.controls select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #61dafb;
+  border-radius: 5px;
+  background: white;
+  cursor: pointer;
+}
+
+.controls input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 2px solid #61dafb;
+  border-radius: 5px;
+  width: 80px;
+  text-align: center;
+}
+
+.controls button {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
-@keyframes App-logo-spin {
+.controls button:active {
+  transform: translateY(0);
+}
+
+.cards-container {
+  scale: 0.5;
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+  margin: 0 auto;
+  width: fit-content;
+  max-width: 95vw;
+  transform-origin: top center;
+}
+
+@media (max-width: 1400px) {
+  .cards-container {
+    transform: scale(0.85);
+  }
+}
+
+@media (max-width: 1100px) {
+  .cards-container {
+    transform: scale(0.7);
+  }
+}
+
+@media (max-width: 900px) {
+  .cards-container {
+    transform: scale(0.6);
+  }
+}
+
+@media (max-width: 700px) {
+  .cards-container {
+    transform: scale(0.5);
+  }
+}
+
+/* Single Card Layout */
+.spread-single {
+  grid-template-columns: auto;
+  place-items: center;
+}
+
+/* Horizontal Layout (3 cards in a row) */
+.spread-horizontal {
+  grid-template-columns: repeat(3, auto);
+}
+
+/* Triangle Layout (Mind-Body-Spirit) */
+.spread-triangle {
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
+}
+
+.spread-triangle .card-0 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.spread-triangle .card-1 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.spread-triangle .card-2 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* Celtic Cross Layout */
+.spread-celtic-cross {
+  grid-template-columns: repeat(6, auto);
+  grid-template-rows: repeat(4, auto);
+  gap: 1.5rem;
+}
+
+.spread-celtic-cross .card-0 {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.spread-celtic-cross .card-1 {
+  grid-column: 2;
+  grid-row: 2;
+  transform: rotate(90deg);
+  z-index: 1;
+}
+
+.spread-celtic-cross .card-2 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.spread-celtic-cross .card-3 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.spread-celtic-cross .card-4 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.spread-celtic-cross .card-5 {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.spread-celtic-cross .card-6 {
+  grid-column: 5;
+  grid-row: 4;
+}
+
+.spread-celtic-cross .card-7 {
+  grid-column: 5;
+  grid-row: 3;
+}
+
+.spread-celtic-cross .card-8 {
+  grid-column: 5;
+  grid-row: 2;
+}
+
+.spread-celtic-cross .card-9 {
+  grid-column: 5;
+  grid-row: 1;
+}
+
+/* Horseshoe Layout */
+.spread-horseshoe {
+  grid-template-columns: repeat(7, auto);
+  grid-template-rows: repeat(2, auto);
+  gap: 1.5rem;
+}
+
+.spread-horseshoe .card-0 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.spread-horseshoe .card-1 {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.spread-horseshoe .card-2 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.spread-horseshoe .card-3 {
+  grid-column: 4;
+  grid-row: 1;
+}
+
+.spread-horseshoe .card-4 {
+  grid-column: 5;
+  grid-row: 2;
+}
+
+.spread-horseshoe .card-5 {
+  grid-column: 6;
+  grid-row: 2;
+}
+
+.spread-horseshoe .card-6 {
+  grid-column: 7;
+  grid-row: 2;
+}
+
+/* Relationship Spread Layout */
+.spread-relationship {
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+  gap: 1.5rem;
+}
+
+.spread-relationship .card-0 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.spread-relationship .card-1 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.spread-relationship .card-2 {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.spread-relationship .card-3 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.spread-relationship .card-4 {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.card {
+  width: 16em;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 4em 1.5rem;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+  max-width: 500px;
+  animation: fadeIn 0.5s ease-in;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.card-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  border-radius: 15px 15px 0 0;
+}
+
+.position-number {
+  background: rgba(255, 255, 255, 0.3);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.position-name {
+  flex: 1;
+  font-size: 1.1rem;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card img {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
+  margin: 0 auto 1rem;
+  display: block;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.card.reversed {
+  border: 3px solid #ff6b6b;
+  background: rgba(255, 235, 235, 0.95);
+}
+
+.card.reversed .card-position {
+  background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+}
+
+.card.reversed .card-info h3 {
+  color: #c92a2a;
+}
+
+.reversed-img {
+  transform: rotate(180deg);
+}
+
+.reversed-badge {
+  color: #c92a2a;
+  font-size: 0.9rem;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.card-info {
+  color: #333;
+  text-align: left;
+}
+
+.card-info h3 {
+  margin: 0 0 1rem 0;
+  color: #2d1b4e;
+  font-size: 1.8rem;
+  text-align: center;
+  border-bottom: 2px solid #764ba2;
+  padding-bottom: 0.5rem;
+}
+
+.card-details {
+  background: rgba(102, 126, 234, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.card-details p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.card-info p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.card-info strong {
+  color: #667eea;
+}
+
+.card-section {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(118, 75, 162, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid #764ba2;
+  display: none;
+}
+
+.card-section h4 {
+  margin: 0 0 0.8rem 0;
+  color: #764ba2;
+  font-size: 1.2rem;
+}
+
+.card-section ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.card-section li {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+  color: #444;
+}
+
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.keyword-tag {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.meanings {
+  background: transparent;
+  padding: 0;
+  border: none;
+}
+
+.meaning-light, .meaning-shadow {
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.meaning-light {
+  background: rgba(255, 215, 0, 0.1);
+  border-left: 4px solid #ffd700;
+}
+
+.meaning-light h4 {
+  color: #c9960e;
+}
+
+.meaning-shadow {
+  background: rgba(75, 0, 130, 0.1);
+  border-left: 4px solid #4b0082;
+}
+
+.meaning-shadow h4 {
+  color: #4b0082;
+}
+
+.mythical {
+  font-style: italic;
+  color: #555;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: scale(0.9);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+  padding: 4em;
+  background: #333;
+  border-radius: 15px;
+  padding-left: 1em;
+}
+
+.modal-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 600px;
+  cursor: default;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.modal-card .card-details {
+  display: block;
+}
+
+.modal-card .card-section {
+  display: block;
+}
+
+.modal-card .card-position .position-number {
+  display: none;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
